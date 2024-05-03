@@ -1,0 +1,264 @@
+.productData{
+    background-color:rgb(228, 214, 214);
+    width:100%;
+    max-width:100%;  
+    padding:10vmax;
+    box-sizing:border-box;
+    display: flex;
+    
+}
+.productData > div{
+width: 40%;
+display: flex;
+flex-direction:column;
+justify-content:space-evenly;
+padding: 1vmax;
+box-sizing: border-box;
+border: 1px solid white;
+}
+.Right{
+    float:right;
+    display:flex;
+    width:100%;
+    
+    float:left;
+}
+.Right >button{
+    width:10vmax;
+}
+.carousel{
+    text-align:center;
+    float:right;
+    justify-content: center;
+
+}
+.productData >div:last-child{
+    align-items: flex-start;
+}
+.carouselImage{
+    width: 15vmax;
+}
+.product-image{
+    
+}
+.Block-1 >h2{
+    color: rgb(54, 25, 47);
+    font: 100 1.4vmax "Roboto";
+}
+.Block-1 >p{
+    color: rgba(54,54,54,0.582);
+    font: 200 0.6vmax cursive;
+}
+.Block-2{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.205);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    width:100%;
+    padding: 1vmax 0;
+}
+.detailBlock{
+    color:rgba(54,54,54,0.582);
+    font:200 0.8vmax cursive ;
+
+}
+.Block-3{
+    width: 90%;
+}
+.Block-3 >h1{
+    color: rgba(17,17,17,0.795);
+    font: 400 1.8vmax "Franklin Gothic Medium";
+    margin: 1vmax 0;
+}
+.Block-3-1{
+display: flex;
+align-items: center;
+}
+.Block-3-2 >button{
+border: none;
+background-color: rgba(0, 0, 0, 0.616);
+padding: 0.5vmax;
+cursor: pointer;
+color: white;
+transition: all 0.5s;
+}
+.Block-3-2 >button:hover{
+    background-color: rgba(0, 0, 0, 0.767); 
+}
+.Block-3-2 >input{
+    border: none;
+    padding: 0.5vmax;
+    width: 1vmax;
+    text-align: center;
+    outline: none;
+    font:400 0.8vmax "Roboto";
+    color: rgba(0, 0, 0, 0.74);
+}
+.Block-3-1 >button:last-child{
+    border: none;
+    background-color: tomato;
+    font: 500 0.7vmax "Roboto";
+    border-radius: 20px;
+    padding: 0.6vmax 2vmax;
+    margin: 1vmax 0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+    outline: none;
+}
+.Block-3-1 >button:last-child:hover{
+    background-color: rgb(221, 43, 12);
+}
+.Block-3 >p{
+    border-top: 1px solid rgba(0, 0, 0, 0.205);
+    border-bottom:1px solid rgba(0, 0, 0, 0.205) ;
+    padding: 1vmax 0;
+    color: rgba(0, 0, 0, 0.651);
+    font: 400 1vmax "Roboto";
+    margin: 1vmax 0;
+}
+.Block-4{
+    color: rgba(0, 0, 0, 0.897);
+    font: 500 1.2vmax sans-serif;
+}
+.Block-4 >p{
+    color: rgba(0, 0, 0, 0.534);
+    font: 300 0.8vmax sans-serif;
+}
+.submitReview{
+    border: none;
+    background-color: tomato;
+    font: 500 0.7vmax "Roboto";
+    border-radius: 20px;
+    padding: 0.6vmax 2vmax;
+    margin: 1vmax 0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+    outline: none;
+}
+.submitReview:hover{
+    background-color: rgb(197,68,45);
+    transition: scale(1.1);
+}
+.submitDialog{
+    display: flex;
+    flex-direction: column;
+}
+.submitDialogTextArea{
+    border: 1px solid rgba(0, 0, 0, 0.74);
+    margin: 1vmax 0;
+    outline: none;
+    padding: 1rem;
+    font: 300 1rem "Roboto";
+}
+.reviewCard{
+    flex: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.205);
+    display: flex;
+    width: 30vmax;
+    border: 1px solid rgba(0, 0, 0, 0.134);
+    flex-direction: column;
+    align-items: center;
+    margin: 1vmax;
+    padding: 3vmax;
+}
+.reviewCard >img{
+    width: 5vmax;
+}
+.reviewCard>p{
+    color: rgba(0, 0, 0, 0.897);
+    font: 600 0.9vmax "Roboto";
+}
+.reviewCardComment{
+    color: rgba(0, 0, 0, 0.534);
+    font: 300 1.8vmax cursive;
+}
+.reviews{
+    display: flex;
+    width: 90%;
+    overflow: auto;
+}
+.ReviewsHeading{
+    color: #000000be;
+    font: 500 1.4vmax "Roboto";
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    padding: 1vmax;
+    width: 20vmax;
+    margin: auto;
+    margin-bottom: 4vmax;
+}
+@media screen and (max-width:700px){
+    .productData{
+        flex-direction: column;
+        height: unset;
+    
+    }
+    .productData >div{
+        width:90%;
+        }
+    .productData >div:last-child{
+        align-items: center;
+    }
+    .Block-1 >h2{
+        font-size: 2.8vmax;
+        text-align: center;
+}
+    .Block-1 >p{
+        text-align: center;
+        font-size: 1vmax;
+    }
+    .Block-2{
+        justify-content: center;
+    }
+    .Block-2 >span{
+        font-size: 1.5vmax;
+
+    }
+    .Block-3 >h1{
+        font: 700 3vmax "Franklin Gothic Medium";
+        text-align: center;
+    }
+    .Block-3-1{
+        flex-direction: column;
+    }
+    .Block-3-2{
+        padding: 2vmax 0;
+    }
+    .Block-3-2 >button{
+        padding: 1.2vmax;
+        width: 4vmax;
+    }
+    .Block-3-2 >input{
+        padding: 1.5vmax;
+        width: 1vmax;
+        font:400 1.8vmax "Roboto"
+    }
+    .Block-3-1 >button:last-child{
+        font: 500 1.7vmax "Roboto";
+        padding: 1.5vmax;
+        width:20vmax;
+        margin: 3vmax 0;
+    }
+    .Block-3 >p{
+        padding: 2.5vmax 0;
+        text-align: center;
+        font:400 2vmax "Roboto";
+    }
+    .Block-4{
+        font:500 2.5vmax sans-serif;
+
+    }
+    .Block-4 >p{
+        font: 300 1.8vmax sans-serif;
+}
+.submitReview{
+    font: 500 1.7uvmax "Roboto";
+    padding: 1.5vmax;
+    width: 20vmax;
+    margin: 1vmax 0;
+}
+
+}
