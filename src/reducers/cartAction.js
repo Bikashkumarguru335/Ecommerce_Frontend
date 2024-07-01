@@ -3,7 +3,7 @@ import { ADD_TO_CART,removeCartItem } from "../actions/cartReducer";
 
  export const addItemsToCart=(id,quantity)=>async(dispatch,getState)=>{
     try{
-     const data=await axios.get(`/api/v1/products/${id}`)
+     const data=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/products/${id}`)
      console.log(data)
     
    const  product=data.data?.Product;
