@@ -38,7 +38,7 @@ const {RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCESS,RESET_PASSWORD_FAIL}=resetPa
     } 
 
 //logout user
-export const logout= () => (dispatch) => {
+export const logout= () =>async(dispatch) => {
     try{
            const data= await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/logout")
                localStorage.removeItem("userLogin")
