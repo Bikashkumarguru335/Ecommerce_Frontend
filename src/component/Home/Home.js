@@ -10,7 +10,7 @@ import {useSelector,useDispatch} from "react-redux";
  
 const Home = () => {
  const Product=useSelector((state)=>{return state.product?.data?.Product ??[]});
-      
+      console.log(Product);
   const dispatch=useDispatch();
        
     useEffect(()=>{

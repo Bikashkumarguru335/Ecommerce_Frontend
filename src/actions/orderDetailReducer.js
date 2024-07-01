@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {ORDER_DETAILS_REQUEST,ORDER_DETAILS_FAIL,ORDER_DETAILS_SUCCESS} from "../constants/orderConstant"
 export const orderDetailsSlice=createSlice({
     name:"orderDetails",
     initialState:{

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { LOAD_USER_REQUEST,LOAD_USER_FAIL,LOAD_USER_SUCCESS,LOGOUT_SUCCESS,LOGOUT_FAIL,LOGIN_REQUEST,LOGIN_FAIL,LOGIN_SUCESS} from "../constants/productConstant";
 const loaduserSlice=createSlice({
     name:"loadUser",
     initialState:{

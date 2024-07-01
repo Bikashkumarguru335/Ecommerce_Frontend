@@ -11,7 +11,7 @@ const Profile = () => {
   const user=useSelector((state)=>state.userDetails?.user?.user)
 
   // const users=user.data.user;
-  //  console.log(data);
+   console.log(user);
   const navigate=useNavigate();
   useEffect(()=>{
     if(isAuthenticated===false){

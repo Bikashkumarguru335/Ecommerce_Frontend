@@ -14,7 +14,7 @@ const ResetPassword = () => {
     const [confirmPassword,setConfirmPassword]=useState("");
     
         
-    const success=useSelector((state)=>state.resetPassword?.success?.data.sucess)
+    // const success=useSelector((state)=>state.resetPassword?.success?.data.success)
     const data=useParams();  
 
       const navigate=useNavigate();
@@ -39,13 +39,13 @@ const ResetPassword = () => {
     }
         
      useEffect(()=>{
-         if(success===true){
-            alert("updated successfully")
-            navigate("/login")
+        //  if(success===true){
+        //     alert("updated successfully")
+        //     navigate("/login")
          
-        }
+        // }
     
-        },[success,navigate,password,confirmPassword])
+        },[dispatch])
     
       return (
         <Fragment>

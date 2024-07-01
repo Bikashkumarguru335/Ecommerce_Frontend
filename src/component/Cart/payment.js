@@ -1,4 +1,4 @@
-import React,{Fragment,useEffect,useRef,useState} from 'react'
+import React,{Fragment,useRef} from 'react'
 import "./payment.css"
 import CheckoutSteps from './CheckoutSteps'
 import { useSelector,useDispatch } from 'react-redux'
@@ -10,7 +10,7 @@ import axios from 'axios';
 import { MdCreditCard,MdEvent,MdVpnKey } from 'react-icons/md';
 import { Typography } from '@mui/material';
 import { createOrder } from '../../reducers/orderAction'
-import { loadStripe } from '@stripe/stripe-js'
+// import { loadStripe } from '@stripe/stripe-js'
 
 
 const Payment = () =>{

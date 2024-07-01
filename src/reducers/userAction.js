@@ -38,19 +38,23 @@ const {RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCESS,RESET_PASSWORD_FAIL}=resetPa
     } 
 
 //logout user
-    export const logout=()=>async(dispatch)=>{
-        try{
-            await axios.get("api/v1/logout")
-             dispatch(LOGOUT_SUCCESS())
-            //  localStorage.removeItem("userLogin")
-            console.log("Logout Successfully")
-        }
-        catch(error){
-            dispatch(LOGOUT_FAIL(error.message))
-        }
+export const logout= () => (dispatch) => {
+    localStorage.removeItem('userLogin');
+    dispatch(LOGOUT_SUCCESS());
+  };
+    // export const logout=()=>async(dispatch)=>{
+    //     try{
+    //         await axios.get("/api/v1/logout")
+    //          dispatch(LOGOUT_SUCCESS())
+    //         //  localStorage.removeItem("userLogin")
+    //         console.log("Logout Successfully")
+    //     }
+    //     catch(error){
+    //         dispatch(LOGOUT_FAIL(error.message))
+    //     }
 
-    }
-    //register     
+    // }
+    // //register     
     export const register=(userData)=>async(dispatch)=>{
     try{
         dispatch(REGISTER_USER_REQUEST())
@@ -65,21 +69,42 @@ const {RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCESS,RESET_PASSWORD_FAIL}=resetPa
     }
     }
     //load user
-    export const loadUser=()=>async(dispatch)=>{
-        try{
-            
-            dispatch(LOAD_USER_REQUEST())
-          
-            const data=await axios.get("/api/v1/me")
-            console.log(data)
-            dispatch(LOAD_USER_SUCCESS(data.data))
+    export const loadUser = () => async (dispatch) => {
+        try {
+          dispatch(LOAD_USER_REQUEST());
+      
+          const userData = localStorage.getItem('userLogin');
+          if (userData) {
+            const user = JSON.parse(userData);
+            console.log(user.token);
+            dispatch(LOAD_USER_SUCCESS(user));
+          } else {
+            const { data } = await axios.get('/api/v1/me');
+            localStorage.setItem('userLogin', JSON.stringify(data));
+            dispatch(LOAD_USER_SUCCESS(data));
+          }
+        } catch (error) {
+          dispatch(LOAD_USER_FAIL(error.message));
         }
-        catch(error){
+      };
+      
+      
+    // export const loadUser=()=>async(dispatch)=>{
+    //     try{
             
-            dispatch(LOAD_USER_FAIL(error.message))
-        }
-    }
-    // update profile 
+    //         dispatch(LOAD_USER_REQUEST())
+    //         const userData = localStorage.getItem('userLogin');
+    //             console.log(userData)
+    //         const data=await axios.get("/api/v1/me")
+    //         console.log(data)
+    //         dispatch(LOAD_USER_SUCCESS(data.data))
+    //     }
+    //     catch(error){
+            
+    //         dispatch(LOAD_USER_FAIL(error.message))
+    //     }
+    // }
+    // // update profile 
     export const updateProfile =(userData)=>async(dispatch)=>{
         try{
             dispatch(UPDATE_PROFILE_REQUEST())

@@ -12,18 +12,17 @@ const cartItems=useSelector((state)=>state.cart?.cartItems)
   const [open,setOpen]=useState(false);
   const navigate=useNavigate();
   const dispatch=useDispatch();
-const options=[ {icon:<MdPerson />,name:"Profile",func:account},
+const options=[ {icon:<MdPerson />,name:"Profile",func:account},{icon:<MdListAlt/>,name:"Orders",func:orders}
+,
 {icon:<MdShoppingCart style={{color:cartItems.length> 0 ? "tomato" :"unset"}}/>,name:`Cart(${cartItems.length})`,func:cart},
   {icon:<MdExitToApp />,name:"Logout",func:logoutUser}];
 
 if(user && user.role==="admin"){
-  options.unshift({icon:<MdListAlt/>,name:"Orders",func:orders})
-  options.unshift({icon:<MdDashboard/>,name:"Dashboard",func:dashboard})}
-  else{
-    return
-  }
+  options.unshift({icon:<MdDashboard/>,name:"Dashboard",func:dashboard})
+}
+ 
 function dashboard(){ navigate("/admin/dashboard")}
-function orders(){navigate("/admin/orders")}
+function orders(){navigate("/orders")}
 function account(){navigate("/account")}
 function cart(){navigate("/cart")}
 function logoutUser(){
