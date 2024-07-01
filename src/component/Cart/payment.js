@@ -67,7 +67,7 @@ try{
             'Content-Type': 'application/json'
            } 
     }
-        const {data}=await axios.post("/api/v1/payment/process",paymentData,config)
+        const {data}=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/payment/process",paymentData,config)
         console.log(data);
         const client_secret=data.client_secret
      
