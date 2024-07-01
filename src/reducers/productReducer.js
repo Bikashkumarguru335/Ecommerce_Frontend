@@ -43,7 +43,10 @@ dispatch(ALL_PRODUCT_SUCESS(result));
 export const getAdminProduct=()=>async(dispatch)=>{
 try{
 dispatch(ADMIN_PRODUCT_REQUEST())
-const data=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products")
+    const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+const data=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products",{headers:{'Authorization': `Bearer ${token}`}})
 dispatch(ADMIN_PRODUCT_SUCESS(data))
 console.log(data)
 }
@@ -53,12 +56,15 @@ catch(error){
 }
 }
 //create product
-export const createNewProduct=(productData,token)=>async(dispatch)=>{
+export const createNewProduct=(productData)=>async(dispatch)=>{
     try{
         dispatch(NEW_PRODUCT_REQUEST())
+        const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
         console.log(productData,token)
 
-    const data=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/new",productData,token)
+    const data=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/new",productData,{headers:{'Authorization': `Bearer ${token}`}})
     console.log(data)
 dispatch(NEW_PRODUCT_SUCCESS(data))
     }
@@ -86,7 +92,10 @@ export const deleteProduct=(id)=>async(dispatch)=>{
    
     try{    
         dispatch(DELETE_PRODUCT_REQUEST())
-         const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/${id}`)
+        const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+         const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/${id}`,{headers:{'Authorization': `Bearer ${token}`}})
          console.log(data)
         dispatch(DELETE_PRODUCT_SUCCESS(data))
     }
@@ -119,8 +128,13 @@ const data=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/a
 export const newReview=(reviewData)=>async(dispatch)=>{
     try{
         dispatch(NEW_REVIEW_REQUEST())
+        const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
         const config={
-            headers:{"Content-Type":"application/json"}
+            headers:{"Content-Type":"application/json",
+                    'Authorization': `Bearer ${token}`
+                    }
         }
         const retrive=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/review`,reviewData,config)
         
@@ -151,8 +165,10 @@ export const getAllReviews=(id)=>async(dispatch)=>{
     export const deleteReview=(reviewId,productId)=>async(dispatch)=>{
         try{
             dispatch(DELETE_REVIEW_REQUEST())
-            
-            const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/reviews?id=${reviewId}&productId=${productId}`)
+            const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+            const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/reviews?id=${reviewId}&productId=${productId}`,{headers:{'Authorization': `Bearer ${token}`}})
             console.log(data)
             dispatch(DELETE_REVIEW_SUCCESS(data.success))
         }
