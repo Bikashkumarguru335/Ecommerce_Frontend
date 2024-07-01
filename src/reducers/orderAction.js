@@ -16,12 +16,16 @@ export const createOrder=(order)=>async(dispatch)=>{
         try{
             console.log(order)
             dispatch(CREATE_ORDER_REQUEST())
+         const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
             const config={
                 headers:{
                     "Content-Type":"application/json",
+                 'Authorization': `Bearer ${token}`
                 },
             };
-            const result=await axios.post("/api/v1/order/new",order,config)
+            const result=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/order/new",order,config)
             console.log(result)
     //    result && result.map((item)=>{
     //             console.log(item)
@@ -42,8 +46,10 @@ export const myOrders=()=>async(dispatch)=>{
     
     try{
         dispatch(MY_ORDER_REQUEST())
-        
-        const data=await axios.get("/api/v1/orders/me")
+        const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const data=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/orders/me",{headers:{'Authorization': `Bearer ${token}`}})
         console.log(data)
     dispatch(MY_ORDER_SUCCESS(data?.data?.orders))
 }
@@ -56,8 +62,10 @@ export const getOrderDetails=(id)=>async(dispatch)=>{
     
     try{
         dispatch(ORDER_DETAILS_REQUEST())
-        
-        const data=await axios.get(`/api/v1/order/${id}`)
+        const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const data=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/order/${id}`,{headers:{'Authorization': `Bearer ${token}`}})
         console.log(data?.data?.order)
     dispatch(ORDER_DETAILS_SUCCESS(data?.data?.order))
 }
@@ -71,8 +79,10 @@ export const getAllOrders=()=>async(dispatch)=>{
     
     try{
         dispatch(ALL_ORDER_REQUEST())
-        
-        const data=await axios.get("/api/v1/admin/orders")
+         const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const data=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/orders",{headers:{'Authorization': `Bearer ${token}`}})
         console.log(data.data?.orders)
     dispatch(ALL_ORDER_SUCCESS(data.data?.orders))
 }
@@ -85,12 +95,16 @@ export const updateOrders=(id,order)=>async(dispatch)=>{
     
     try{
         dispatch(UPDATE_ORDER_REQUEST())
+     const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
         const config={
             headers:{
                 "Content-Type":"application/json",
+             'Authorization': `Bearer ${token}`
             },
         };
-        const data=await axios.put(`/api/v1/admin/order/${id}`,order,config)
+        const data=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/order/${id}`,order,config)
     dispatch(UPDATE_ORDER_SUCCESS(data))
 }
 catch(error){
@@ -102,12 +116,15 @@ export const deleteOrder=(id)=>async(dispatch)=>{
     
     try{
         dispatch(DELETE_ORDER_REQUEST())
+     const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
         // const config={
         //     headers:{
         //         "Content-Type":"application/json",
         //     },
         // };
-        const data=await axios.delete(`/api/v1/admin/order/${id}`)
+        const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/order/${id}`,{headers:{'Authorization': `Bearer ${token}`}})
     dispatch(DELETE_ORDER_SUCCESS(data))
 }
 catch(error){
