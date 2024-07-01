@@ -26,7 +26,7 @@ const {RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCESS,RESET_PASSWORD_FAIL}=resetPa
         try{ 
             dispatch(LOGIN_REQUEST())
           
-            const data=await axios.post("/api/v1/login",{email,password})
+            const data=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/login",{email,password})
             console.log(data)
             dispatch(LOGIN_SUCESS(data.data))
             localStorage.setItem('userLogin', JSON.stringify(data.data));
@@ -39,9 +39,16 @@ const {RESET_PASSWORD_REQUEST,RESET_PASSWORD_SUCESS,RESET_PASSWORD_FAIL}=resetPa
 
 //logout user
 export const logout= () => (dispatch) => {
-    localStorage.removeItem('userLogin');
-    dispatch(LOGOUT_SUCCESS());
-  };
+    try{
+           const data= await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/logout")
+               localStorage.removeItem("userLogin")
+                    dispatch(LOGOUT_SUCCESS(data))
+
+    }
+         catch(error){
+             dispatch(LOGOUT_FAIL(error.message))
+         }
+     };
     // export const logout=()=>async(dispatch)=>{
     //     try{
     //         await axios.get("/api/v1/logout")
@@ -59,7 +66,7 @@ export const logout= () => (dispatch) => {
     try{
         dispatch(REGISTER_USER_REQUEST())
         
-    const data=await axios.post("/api/v1/register",userData)
+    const data=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/register",userData)
     dispatch(REGISTER_USER_SUCESS(data))
     }
     catch(error)
@@ -74,15 +81,11 @@ export const logout= () => (dispatch) => {
           dispatch(LOAD_USER_REQUEST());
       
           const userData = localStorage.getItem('userLogin');
-          if (userData) {
             const user = JSON.parse(userData);
-            console.log(user.token);
-            dispatch(LOAD_USER_SUCCESS(user));
-          } else {
-            const { data } = await axios.get('/api/v1/me');
-            localStorage.setItem('userLogin', JSON.stringify(data));
+            const token=user.token;
+            const { data } = await axios.get('https://ecommerce-backend-mvqm.onrender.com/api/v1/me',{headers:{'Authorization': `Bearer ${token}`}});
             dispatch(LOAD_USER_SUCCESS(data));
-          }
+          
         } catch (error) {
           dispatch(LOAD_USER_FAIL(error.message));
         }
@@ -108,7 +111,10 @@ export const logout= () => (dispatch) => {
     export const updateProfile =(userData)=>async(dispatch)=>{
         try{
             dispatch(UPDATE_PROFILE_REQUEST())
-        const response=await axios.put("/api/v1/me/update",userData)
+           const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const response=await axios.put("https://ecommerce-backend-mvqm.onrender.com/api/v1/me/update",userData,{headers:{'Authorization': `Bearer ${token}`}})
         dispatch(UPDATE_PROFILE_SUCESS(response))
         
         }
@@ -122,7 +128,10 @@ export const logout= () => (dispatch) => {
         export const updatePassword =(passwords)=>async(dispatch)=>{
             try{
                 dispatch(UPDATE_PASSWORD_REQUEST())
-            const response=await axios.put("/api/v1/password/update",passwords)
+               const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+            const response=await axios.put("https://ecommerce-backend-mvqm.onrender.com/api/v1/password/update",passwords,{headers:{'Authorization': `Bearer ${token}`}})
             dispatch(UPDATE_PASSWORD_SUCESS(response))
             
             }
@@ -138,7 +147,7 @@ export const logout= () => (dispatch) => {
                     console.log(myForm)
 
                     dispatch(FORGOT_PASSWORD_REQUEST())
-                    const data=await axios.post("/api/v1/password/forgot",myForm)
+                    const data=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/password/forgot",myForm)
 
                 dispatch(FORGOT_PASSWORD_SUCESS(data))
                 console.log(data);
@@ -159,7 +168,7 @@ export const resetPassword=(token,passwords)=>async(dispatch)=>{
             },
           };
       
-        const data=await axios.put(`/api/v1/password/reset/${token}`,{passwords},config)
+        const data=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/password/reset/${token}`,{passwords},config)
         dispatch(RESET_PASSWORD_SUCESS(data))
           console.log(data)
     }
@@ -172,8 +181,10 @@ export const getAllUsers=()=>async(dispatch)=>{
     try{
         
         dispatch(ALL_USERS_REQUEST())
-      
-        const data=await axios.get("/api/v1/admin/users")
+      const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const data=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/users",{headers:{'Authorization': `Bearer ${token}`}})
         console.log(data)
         dispatch(ALL_USERS_SUCCESS(data.data.users))
     }
@@ -187,8 +198,10 @@ export const getUsersDetails=(id)=>async(dispatch)=>{
     try{
 
 dispatch( USER_DETAILS_REQUEST())
-      
-        const data=await axios.get(`/api/v1/admin/user/${id}`)
+      const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const data=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/user/${id}`,{headers:{'Authorization': `Bearer ${token}`}})
         
         dispatch(USER_DETAILS_SUCCESS(data.user))
     }
@@ -201,8 +214,13 @@ dispatch( USER_DETAILS_REQUEST())
 export const updateUser =(id,userData)=>async(dispatch)=>{
     try{
         dispatch(UPDATE_USER_REQUEST())
-        const config={headers:{"Content-Type":"application/json"}}
-    const response=await axios.put(`/api/v1/admin/user/${id}`,userData,config)
+       const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const config={headers:{"Content-Type":"application/json",
+                              'Authorization':`Bearer ${token}`
+                              }}
+    const response=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/user/${id}`,userData,config)
     console.log(response)
     dispatch(UPDATE_USER_SUCESS(response.success))
     
@@ -217,7 +235,10 @@ export const updateUser =(id,userData)=>async(dispatch)=>{
     export const deleteUser =(id)=>async(dispatch)=>{
         try{
             dispatch(DELETE_USER_REQUEST())
-        const response=await axios.delete(`/api/v1/admin/user/${id}`)
+           const userData = localStorage.getItem('userLogin');
+            const user = JSON.parse(userData);
+            const token=user.token;
+        const response=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/user/${id}`,{headers:{'Authorization': `Bearer ${token}`}})
         console.log(response);
         dispatch(DELETE_USER_SUCCESS(response.success))
         
