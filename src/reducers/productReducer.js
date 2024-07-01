@@ -21,12 +21,12 @@ export const fetchAllProducts=(keyword="",currentPage=1,price=[50,20000],categor
         
       dispatch(ALL_PRODUCT_REQUEST()); 
 
-let result=await axios.get(`/api/v1/products?keyword=${keyword}&&page=${currentPage}&price[gte]=${price[0]}
+let result=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/products?keyword=${keyword}&&page=${currentPage}&price[gte]=${price[0]}
 &price[lte]=${price[1]}&ratings[gte]=${ratings}
 `)
 
 if(category){
-result=await axios.get(`/api/v1/products?keyword=${keyword}&&page=${currentPage}&price[gte]=${price[0]}
+result=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/products?keyword=${keyword}&&page=${currentPage}&price[gte]=${price[0]}
 &price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`)
 }
 console.log(result);
@@ -43,7 +43,7 @@ dispatch(ALL_PRODUCT_SUCESS(result));
 export const getAdminProduct=()=>async(dispatch)=>{
 try{
 dispatch(ADMIN_PRODUCT_REQUEST())
-const data=await axios.get("/api/v1/admin/products")
+const data=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products")
 dispatch(ADMIN_PRODUCT_SUCESS(data))
 console.log(data)
 }
@@ -58,7 +58,7 @@ export const createNewProduct=(productData,token)=>async(dispatch)=>{
         dispatch(NEW_PRODUCT_REQUEST())
         console.log(productData,token)
 
-    const data=await axios.post("/api/v1/admin/products/new",productData,token)
+    const data=await axios.post("https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/new",productData,token)
     console.log(data)
 dispatch(NEW_PRODUCT_SUCCESS(data))
     }
@@ -72,7 +72,7 @@ export const productDetails=(id)=>async(dispatch)=>{
     try{
         console.log(id);
         dispatch(PRODUCT_DETAILS_REQUEST())
-        const data=await axios.get(`/api/v1/products/${id}`)
+        const data=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/products/${id}`)
         console.log(data);
         dispatch(PRODUCT_DETAILS_SUCCESS(data));
     }
@@ -86,7 +86,7 @@ export const deleteProduct=(id)=>async(dispatch)=>{
    
     try{    
         dispatch(DELETE_PRODUCT_REQUEST())
-         const data=await axios.delete(`/api/v1/admin/products/${id}`)
+         const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/${id}`)
          console.log(data)
         dispatch(DELETE_PRODUCT_SUCCESS(data))
     }
@@ -105,7 +105,7 @@ export const updateProduct=(id,productData)=>async(dispatch)=>{
            } 
         }
         
-const data=await axios.put(`/api/v1/admin/products/${id}`,productData,config)
+const data=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/admin/products/${id}`,productData,config)
         // console.log(productData);
         console.log(data.data);
 
@@ -122,7 +122,7 @@ export const newReview=(reviewData)=>async(dispatch)=>{
         const config={
             headers:{"Content-Type":"application/json"}
         }
-        const retrive=await axios.put(`/api/v1/review`,reviewData,config)
+        const retrive=await axios.put(`https://ecommerce-backend-mvqm.onrender.com/api/v1/review`,reviewData,config)
         
         dispatch(NEW_REVIEW_SUCCESS(retrive.success))
     }
@@ -137,7 +137,7 @@ export const getAllReviews=(id)=>async(dispatch)=>{
     try{
         dispatch(ALL_REVIEWS_REQUEST())
         
-        const data=await axios.get(`/api/v1/reviews?id=${id}`)
+        const data=await axios.get(`https://ecommerce-backend-mvqm.onrender.com/api/v1/reviews?id=${id}`)
         console.log(data)
         dispatch(ALL_REVIEWS_SUCCESS(data))
     }
@@ -152,7 +152,7 @@ export const getAllReviews=(id)=>async(dispatch)=>{
         try{
             dispatch(DELETE_REVIEW_REQUEST())
             
-            const data=await axios.delete(`/api/v1/reviews?id=${reviewId}&productId=${productId}`)
+            const data=await axios.delete(`https://ecommerce-backend-mvqm.onrender.com/api/v1/reviews?id=${reviewId}&productId=${productId}`)
             console.log(data)
             dispatch(DELETE_REVIEW_SUCCESS(data.success))
         }
