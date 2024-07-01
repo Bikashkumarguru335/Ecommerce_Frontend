@@ -14,7 +14,7 @@ const NewProduct = () => {
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const success=useSelector((state)=>state.newProduct?.products?.data?.success)
-    const token= useSelector((state)=>state.userDetails?.user?.token)
+    // const token= useSelector((state)=>state.userDetails?.user?.token)
     const [name,setName]=useState("");
     const [price,setPrice]=useState(0);
     const [description,setDescription]=useState("");
@@ -58,7 +58,7 @@ const extractedData = {};
 myForm.forEach((value, key) => {
   extractedData[key] = value;
 });
-await dispatch(createNewProduct(extractedData,token))
+await dispatch(createNewProduct(extractedData))
     
 
        }
