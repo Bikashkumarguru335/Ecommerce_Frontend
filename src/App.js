@@ -48,7 +48,7 @@ function App() {
   const [stripeApiKey,setStripeApiKey]=useState("")
   async function getStripeApiKey(){
     try{
-    const response=await axios.get("/api/v1/stripeapikey");
+    const response=await axios.get("https://ecommerce-backend-mvqm.onrender.com/api/v1/stripeapikey");
     if (response.data && response.data.stripeApiKey) {
       setStripeApiKey(response.data.stripeApiKey);
     }
